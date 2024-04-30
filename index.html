@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Jquery</title>
+    <style>
+        .blue{
+            color: aqua;
+        }
+        .bold{
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="intro">Zeeshan Is a good boy</p>
+    <p>Zeeshan Is A Developer</p>
+    <button>Click Me!</button>
+    <button class="double">Double Click </button>
+    <!-- input field -->
+
+    <input type="text" name="" id="">
+
+    <!-- hide and show text -->
+    <h2 class="name">Zeeshan</h2>
+    <button class="showName">Show Name</button>
+    <button class="hideName">Hide Name</button>
+
+    <!-- toggle name -->
+    <button class="toggle">Show/Hide</button>
+
+    <!-- fade in fade out -->
+    <!-- Slide Down -->
+    <div class="down" style="background-color: aqua;">Slide Down</div>
+    <div class="div" style="display: none; background-color: aqua; ">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique doloribus quidem sint accusantium saepe
+        facilis placeat dolorem nulla quia dignissimos, dolor vel incidunt ut laborum. Suscipit deserunt soluta ipsum
+        quam.
+    </div>
+
+
+    <!-- fade out btn  for the div -->
+    <button class="fadeOutBtn">Fade Out</button>
+    <button class="fadeInBtn">Fade In</button>
+
+    <!-- fade toggle -->
+    <button class="fadeToggle" style="margin:10px;">Fade Toggle</button>
+
+    <!-- animate Div -->
+    <button class="stopAnim">Stop Animate</button>
+    <div class="animDiv"
+        style="display:flex; align-items: center; justify-content: center; height: 100px; width: 100px; background-color: rgb(14, 244, 252); position: relative;">
+        <span>Click Me</span>
+    </div>
+
+    <!-- Get Content - text(), html(), and val() -->
+    <div class="info">My name is <b>Zeeshan Noor</b> and I am a <b>Web Developer</b></div>
+    <button class="infoBtn">Text()</button>
+    <button class="infoBtn1">html()</button>
+    <button class="infoBtn2">text() with call back fun</button>
+    <button class="infoBtn3">html() with call back fun</button>
+
+    <!-- attr method -->
+    <div style="margin: 20px 0;">
+        <a href="https://www.zeeshannoor.online/" title="Zeeshan noor" id="profile">Profile</a>
+        <button id="proBtn">Profile Button</button>
+    </div>
+
+    <!-- append child -->
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+    <button id="appendItem">Append Item</button>
+    <button id="prependItem">Prepend Method</button>
+    <button id="before">Add text before list</button>
+    <button id="after">Add text after list</button>
+
+    <!-- AddClass method -->
+    <i style="margin: 20px 0;" id="paratxt" class="paratxt">This paragraph has normal color.</i>
+    <button class="addClass">addClass</button>
+</body>
+<script>
+    $(document).ready(function () {
+        $("button:first").click(() => {
+            // * selector
+            // $("*").hide();
+
+            // select current element this
+            // $(this).hide();
+
+            //select all p elements with class intro
+            $("p.intro").hide();
+        });
+
+        //Double click event
+        $(".double").dblclick(() => {
+            $("p.intro").hide();
+        });
+
+        //hover()method
+        $("button:first").hover(() => {
+            $("p").hide();
+        })
+
+        //input focus
+        $("input").focus(function () {
+            $(this).css("background-color", "red");
+
+        });
+        //blur
+        $("input").blur(function () {
+            $(this).css("background-color", "green");
+        });
+
+
+        // $("p").click(function () {
+        //     $(this).hide();
+        // }) 
+
+        //  on mehod (add multiple event handlers)
+        $("p").on({
+            click: function () { $(this).hide() },
+            mouseenter: function () {
+                $(this).css("color", "green");
+            },
+            mouseleave: function () {
+                $(this).css("color", "black");
+            },
+        });
+
+        //show name and hide name
+
+        $(".showName").click(function () {
+            $(".name").show();
+        });
+        $(".hideName").click(function () {
+            $(".name").hide();
+        });
+
+        //toggle name
+        $(".toggle").click(function () {
+            $(".name").toggle("slow");
+        });
+
+        //Fade Out 
+        $(".fadeOutBtn").click(function () {
+            $(".div").fadeOut("fast");
+        })
+
+        //fade in
+        $(".fadeInBtn").click(function () {
+            $(".div").fadeIn("fast");
+        })
+
+        //fade toggle
+        $(".fadeToggle").click(function () {
+            $(".div").fadeToggle("fast");
+        });
+
+        //slide down
+        // $(".down").click(function(){
+        //     $(".div").slideDown("slow");
+        // });
+
+        //slide toggle
+        $(".down").click(function () {
+            $(".div").slideToggle("slow");
+        })
+
+        // animate div
+        $(".animDiv").click(function () {
+            $(".animDiv").animate({ height: '300px', opacity: 0.8 }, "slow");
+            $(".animDiv").animate({ width: '300px', opacity: 0.4 }, "slow");
+            $(".animDiv").animate({ height: '100px', opacity: 0.4 }, "slow");
+            $(".animDiv").animate({ width: '100px', opacity: 1 }, "slow");
+        });
+
+        //stop anim
+        $(".stopAnim").click(function () {
+            $(".animDiv").stop();
+        });
+
+        ///get text using text()
+        $(".infoBtn").click(function () {
+            alert("Text: " + $(".info").text());
+        });
+
+        //get text with html tags like inner.Html in js using html();
+        $(".infoBtn1").click(function () {
+            alert("Html: " + $(".info").html());
+        });
+
+
+        // call back function in get text and html first parameter shows index and second shows orignal old value
+        $(".infoBtn2").click(function () {
+            $(".info").text(function (i, old) {
+                return "Old Value: " + old + ", New Value is Index: " + i;
+            });
+        });
+
+        // html() with call back function
+
+        $(".infoBtn3").click(function () {
+            $(".info").html(function (i, old) {
+                return "<b>" + old + "</b>";
+            });
+        });
+
+        ///change attribute
+        $("#proBtn").click(function () {
+            $("#profile").attr({
+                "href": "https://www.w3schools.com/jquery/jquery_dom_set.asp",
+                "title": "W3 school"
+            })
+        });
+        
+        //append method insert at the end of element
+        $("#appendItem").click(function(){
+            $("ul").append("<li>Item 3</li>")
+        });
+
+        // The jQuery prepend() method inserts content AT THE BEGINNING of the selected HTML elements.
+
+        $("#prependItem").click(function(){
+            $("ul").prepend("<li>Item 3</li>")
+        });
+
+        //after and before method
+        $("#before").click(function(){
+            $("ul").before("beforeeeeeeeee")
+        });
+
+        //after text add
+        $("#after").click(function(){
+            $("ul").after("afterrrrrrrrrrrrr")
+        });
+
+        //Add multiple classes by using addClass() method
+        $(".addClass").click(function(){
+            $(".paratxt").addClass("blue bold");
+        });
+
+    });
+
+</script>
+
+</html>
